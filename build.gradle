@@ -1,0 +1,105 @@
+project.group = 'org.anotes'
+project.version = '1.0.0'
+
+project.ext {
+    springVersion = "4.0.0.BUILD-SNAPSHOT"
+    slf4jVersion = "1.7.6"
+    httpClientVersion = "4.3.2"
+    cxfVersion = "3.0.0-milestone1"
+    cxfArtifacts = [
+            'cxf-rt-frontend-jaxws',
+            'cxf-rt-frontend-jaxrs',
+            'cxf-rt-transports-http',
+            'cxf-rt-rs-client',
+            'cxf-rt-rs-service-description',
+    ]
+    springArtifacts = [
+            'spring-beans',
+            'spring-context',
+            'spring-core',
+            'spring-aop',
+            'spring-web'
+    ]
+}
+
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+def localMavenRepo = 'file://E:/aw/m2/repository3'
+
+repositories {
+    maven {
+        url localMavenRepo
+    }
+    mavenCentral()
+}
+
+
+dependencies {
+    compile "org.slf4j:jcl-over-slf4j:$slf4jVersion",
+            "org.slf4j:jul-to-slf4j:$slf4jVersion"
+    compile "org.aspectj:aspectjrt:1.6.12"
+    compile "org.aspectj:aspectjweaver:1.6.12"
+    compile "org.apache.httpcomponents:httpclient:$httpClientVersion"
+    compile "javax.ws.rs:javax.ws.rs-api:2.0"
+    compile "org.codehaus.jackson:jackson-jaxrs:1.9.13"
+
+    springArtifacts.each { artifact ->
+        compile "org.springframework:$artifact:$springVersion"
+    }
+
+    cxfArtifacts.each { artifact ->
+        compile "org.apache.cxf:$artifact:$cxfVersion"
+    }
+
+    runtime "org.slf4j:slf4j-log4j12:$project.slf4jVersion"
+    runtime "log4j:log4j:1.2.16"
+    runtime "cglib:cglib:2.2.2"
+    testCompile "org.jmock:jmock-junit4:2.5.1"
+    testCompile "org.jmock:jmock-legacy:2.5.1"
+    testCompile "junit:junit:4.11"
+    testCompile "org.springframework:spring-test:$project.springVersion"
+}
+
+httpPort = 8062
+stopPort = 9451
+stopKey = 'foo'
+
+// New configuration for CXF dependencies.
+configurations { cxfTool }
+ext {
+// Artifacts for CXF dependency.
+    cxfToolArtifacts = [
+            'cxf-tools-wsdlto-frontend-jaxws',
+            'cxf-tools-wsdlto-databinding-jaxb',
+            'cxf-tools-common',
+            'cxf-tools-wsdlto-core'
+    ]
+}
+
+dependencies {
+    cxfToolArtifacts.each { artifact ->
+        cxfTool "org.apache.cxf:$artifact:$cxfVersion"
+    }
+}
+
+task wsdl2java(type: JavaExec) {
+    ext {
+        outputDir = file("$buildDir/generated/cxf")
+    }
+    outputs.upToDateWhen { false }
+    outputs.dir outputDir
+    main = 'org.apache.cxf.tools.wsdlto.WSDLToJava'
+    classpath = configurations.cxfTool
+    args '-d', outputDir
+    args "-client"
+    args '-verbose'
+    args '-validate'
+    args 'http://localhost:8097/translatorPort?wsdl'
+    doLast {
+        println "[INFO] Client files generated"
+    }
+}
+

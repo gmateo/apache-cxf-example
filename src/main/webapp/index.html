@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ANotes Services</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <h1>ANotes Services</h1>
+
+    <h2>Available SOAP services:</h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">TranslatorPT</div>
+        <div class="panel-body">
+            <p>translate</p>
+        </div>
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <td> Endpoint address:</td>
+                <td> http://services.gamal-mateo.cloudbees.net/translatorPort</td>
+            </tr>
+            <tr>
+                <td> WSDL:</td>
+                <td><a href="http://services.gamal-mateo.cloudbees.net/translatorPort?wsdl">
+                    {http://anotes.org/services/translator/ws}translatorService </a></td>
+            </tr>
+            <tr>
+                <td> Target namespace:</td>
+                <td> http://anotes.org/services/translator/ws</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>Available RESTful services:</h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Translator</div>
+        <div class="panel-body">
+            <p>translate</p>
+        </div>
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <td> Endpoint address:</td>
+                <td> http://services.anotes.org/translator</td>
+            </tr>
+            <tr>
+                <td> WADL:</td>
+                <td><a href="http://services.gamal-mateo.cloudbees.net/translator?_wadl">http://services.anotes.org/translator?_wadl</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>
+
