@@ -22,3 +22,6 @@ And you will have the project configured for Intellij IDE.
 Also you can execute in jetty with:
 
     gradle jettyrun
+
+
+[More Details](http://www.apprenticeshipnotes.org/2014/02/apache-cxf-jax-ws-jax-rs-example.html)
