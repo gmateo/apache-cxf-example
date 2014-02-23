@@ -27,7 +27,7 @@ apply plugin: 'jetty'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-def localMavenRepo = 'file://E:/aw/m2/repository3'
+def localMavenRepo = 'file://E:/anotes/m2/repository3'
 
 repositories {
     maven {
